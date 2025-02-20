@@ -8,7 +8,11 @@ A **Agenda de Comemorações** é uma aplicação web responsiva que permite aos
 
 ## 🖥️ Tela inicial:
 
-[Adicionar screenshot da tela inicial]
+![1](https://github.com/user-attachments/assets/e267dc1c-b52d-4521-a88b-e32c88fb7136)
+
+![2jpg](https://github.com/user-attachments/assets/265d25b1-7f77-4ba7-92d5-a378d5018986)
+
+![3](https://github.com/user-attachments/assets/58ca71ec-31e2-437a-aba4-155fdd027868)
 
 A interface da Agenda de Comemorações exibe:
 
