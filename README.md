@@ -4,7 +4,7 @@ Uma aplicação web interativa para gerenciar aniversários e datas comemorativa
 
 ## 📜 Descrição
 
-A Agenda de Comemorações é uma aplicação web responsiva que permite aos usuários cadastrar e gerenciar aniversários de familiares, amigos e pets. O sistema oferece recursos como compartilhamento, backup dos dados e exportação para calendário.
+A **Agenda de Comemorações** é uma aplicação web responsiva que permite aos usuários cadastrar e gerenciar aniversários de familiares, amigos e pets. O sistema oferece recursos como compartilhamento, backup dos dados e exportação para calendário.
 
 ## 🖥️ Tela inicial:
 
@@ -28,7 +28,7 @@ A interface da Agenda de Comemorações exibe:
 - **Web Share API**: Compartilhamento de aniversários
 
 ## 📚 Estrutura de Pastas
-
+```bash
 📚 Agenda_de_Comemoracoes
 ├── 📁 assets
 │ ├── 📁 images # Imagens do projeto
@@ -36,6 +36,7 @@ A interface da Agenda de Comemorações exibe:
 ├── index.html # Página principal
 ├── styles.css # Arquivo de estilização
 └── script.js # Lógica da aplicação
+```
 
 ## 🛠️ Instalação
 
@@ -43,7 +44,9 @@ Para utilizar a Agenda de Comemorações, siga os passos abaixo:
 
 1. Clone este repositório:
 
+```bash
 git clone https://github.com/Carla-coder/Agenda_de_Comemoracoes.git
+```
 
 2. Abra o arquivo `index.html` em seu navegador.
 
@@ -73,6 +76,7 @@ git clone https://github.com/Carla-coder/Agenda_de_Comemoracoes.git
 
 O projeto utiliza variáveis CSS para fácil personalização:
 
+```bash
 css
 :root {
 --cor-primaria: #D4A373; / Marrom pastel /
@@ -80,6 +84,8 @@ css
 --cor-texto: #4A4A4A; / Cinza escuro /
 / ... outras cores ... /
 }
+
+```
 
 ## 🎵 Créditos
 
