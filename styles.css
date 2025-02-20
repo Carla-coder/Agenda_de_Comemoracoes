@@ -1,0 +1,774 @@
+/* 1. Variáveis e Configurações Globais */
+:root {
+    /* Cores do Tema */
+    --cor-primaria: #D4A373;    /* Marrom pastel */
+    --cor-secundaria: #FEFAE0;  /* Bege claro suave */
+    --cor-texto: #4A4A4A;       /* Cinza escuro */
+    --cor-borda: #E9EDC9;       /* Bege mais claro */
+    
+    /* Cores dos Botões */
+    --cor-botao-editar: #FAEDCD;    /* Bege pastel */
+    --cor-botao-excluir: #D4A373;   /* Marrom pastel */
+    --cor-botao-cadastrar: #CCD5AE;  /* Verde pastel */
+    --cor-destaque: #E9DAC1;        /* Rosa pastel suave */
+    
+    /* Configurações de Animação */
+    --tempo-transicao: 0.3s;
+    --curva-animacao: ease;
+}
+
+/* Tema Escuro */
+[data-theme="dark"] {
+    --cor-secundaria: #2C3639;
+    --cor-texto: #DCD7C9;
+    --cor-borda: #3F4E4F;
+    --cor-fundo-card: #3F4E4F;
+    --cor-texto-secundario: #E9DAC1;
+}
+
+/* 2. Reset e Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-botao-cadastrar) var(--cor-secundaria);
+}
+
+/* Estilização da barra de rolagem do body */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--cor-secundaria);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--cor-botao-cadastrar);
+    border-radius: 10px;
+    border: 3px solid var(--cor-secundaria);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #BBc4A0; /* Mesmo tom usado no hover do botão cadastrar */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #D4A373;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.formulario {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+form {
+    display: grid;
+    gap: 15px;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}
+
+/* Estilo para as opções do select */
+select option {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    padding: 10px;
+}
+
+/* Remove a cor azul padrão quando a opção está selecionada */
+select option:checked,
+select option:hover,
+select option:focus,
+select option:active {
+    background: var(--cor-primaria) linear-gradient(0deg, var(--cor-primaria) 0%, var(--cor-primaria) 100%);
+    color: white;
+}
+
+/* Para Firefox */
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 var(--cor-texto);
+}
+
+/* Para Chrome/Safari */
+select::-ms-expand {
+    display: none;
+}
+
+.btn-cadastrar {
+    background-color: var(--cor-botao-cadastrar);
+    color: #4A4A4A; /* Texto mais escuro para legibilidade */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cadastrar:hover {
+    background-color: #BBc4A0; /* Tom mais escuro do verde pastel */
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtro-btn {
+    padding: 8px 15px;
+    border: 1px solid var(--cor-primaria);
+    background-color: white;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.filtro-btn.ativo {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.card-aniversariante {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    background-image: url('./assets/images/birthday-pattern.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+}
+
+.card-aniversariante::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.card-aniversariante:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+}
+
+.info-aniversariante {
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+}
+
+.info-aniversariante h3 {
+    color: var(--cor-primaria);
+    margin-bottom: 5px;
+}
+
+.info-aniversariante p {
+    color: #666;
+    margin: 3px 0;
+}
+
+.acoes {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-editar {
+    background-color: var(--cor-botao-editar);
+    color: #4A4A4A;
+    border: 1px solid #E9EDC9;
+}
+
+.btn-editar:hover {
+    background-color: #E9EDC9;
+}
+
+.btn-excluir {
+    background-color: var(--cor-botao-excluir);
+    color: white;
+    border: 1px solid #BC8A5F;
+}
+
+.btn-excluir:hover {
+    background-color: #BC8A5F;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .card-aniversariante {
+        grid-template-columns: 1fr; /* Muda para uma coluna em mobile */
+        text-align: center;
+        gap: 10px;
+    }
+
+    .foto-aniversariante {
+        margin: 0 auto; /* Centraliza a foto */
+    }
+
+    .acoes {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filtro-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .estatisticas {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards por linha em mobile */
+        gap: 10px;
+    }
+
+    .countdown-timer {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .input-foto::-webkit-file-upload-button {
+        width: 100%;
+        margin: 0 0 8px 0;
+    }
+
+    .input-foto {
+        text-align: center;
+    }
+
+    /* Ajusta o formulário para mobile */
+    form {
+        gap: 12px;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Ajusta os botões de ação */
+    .btn-editar, .btn-excluir {
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .titulo-decorado i {
+        font-size: 16px;
+    }
+    
+    .filtros {
+        flex-direction: column;
+    }
+    
+    .estatisticas {
+        grid-template-columns: 1fr; /* 1 card por linha em telas muito pequenas */
+    }
+    
+    .btn-exportar {
+        width: 100%; /* Faz o botão ocupar toda a largura em telas pequenas */
+        justify-content: center;
+    }
+    
+    .countdown-timer {
+        flex-wrap: wrap; /* Permite que os itens da contagem quebrem em telas pequenas */
+    }
+}
+
+.titulo-decorado {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.titulo-decorado i {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Fazendo os ícones do h2 um pouco menores */
+h2 .titulo-decorado i {
+    font-size: 20px;
+}
+
+.titulo-decorado i:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Ajustando o espaçamento específico do h2 */
+h2 {
+    margin-bottom: 20px; /* Um pouco menor que o h1 */
+}
+
+.card-aniversariante[data-tipo="familiar"] {
+    border-left: 4px solid #E9DAC1;
+}
+
+.card-aniversariante[data-tipo="amigo"] {
+    border-left: 4px solid var(--cor-botao-cadastrar); 
+}
+
+.card-aniversariante[data-tipo="pet"] {
+    border-left: 4px solid var(--cor-primaria); 
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.proximo-aniversario {
+    margin: 30px 0;
+}
+
+.countdown-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.countdown-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#proximoNome {
+    font-size: 1.2em;
+    color: var(--cor-primaria);
+    font-weight: bold;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.countdown-item span {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.countdown-item label {
+    font-size: 0.8em;
+    color: var(--cor-texto);
+}
+
+.busca {
+    margin: 20px 0;
+}
+
+.input-busca {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    color: var(--cor-texto);
+    transition: all 0.3s ease;
+}
+
+.input-busca:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.2);
+}
+
+.input-busca::placeholder {
+    color: #999;
+}
+
+.estatisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card i {
+    font-size: 24px;
+    color: var(--cor-primaria);
+    margin-bottom: 10px;
+}
+
+.stat-numero {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    margin: 5px 0;
+}
+
+.stat-label {
+    color: var(--cor-texto);
+    font-size: 0.9em;
+}
+
+.exportar {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btn-exportar {
+    background-color: var(--cor-botao-cadastrar); /* Verde pastel */
+    color: var(--cor-texto);
+    padding: 12px 24px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-exportar:hover {
+    background-color: #BBc4A0; /* Tom mais escuro do verde pastel */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-exportar i {
+    font-size: 18px;
+    color: var(--cor-primaria); /* Marrom pastel */
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+    font-size: 0.9em;
+}
+
+.copyright p {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.copyright p:hover {
+    opacity: 1;
+    color: var(--cor-primaria);
+}
+
+/* Adicionar antes do estilo .card-aniversariante */
+#listaAniversariantes {
+    max-height: 400px; /* Altura máxima do container */
+    overflow-y: auto; /* Adiciona scroll vertical */
+    padding-right: 10px; /* Espaço para a barra de rolagem */
+    margin-right: -10px; /* Compensa o padding */
+}
+
+/* Estilização da barra de rolagem */
+#listaAniversariantes::-webkit-scrollbar {
+    width: 8px;
+}
+
+#listaAniversariantes::-webkit-scrollbar-track {
+    background: var(--cor-secundaria);
+    border-radius: 10px;
+}
+
+#listaAniversariantes::-webkit-scrollbar-thumb {
+    background: var(--cor-primaria);
+    border-radius: 10px;
+}
+
+#listaAniversariantes::-webkit-scrollbar-thumb:hover {
+    background: #BC8A5F;
+}
+
+/* Para Firefox */
+#listaAniversariantes {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-primaria) var(--cor-secundaria);
+}
+
+.foto-aniversariante {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--cor-primaria);
+}
+
+.foto-aniversariante img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foto-aniversariante.sem-foto {
+    background-color: var(--cor-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foto-aniversariante.sem-foto i {
+    font-size: 2em;
+    color: white;
+}
+
+.input-foto {
+    padding: 8px;
+    background-color: white;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-foto::-webkit-file-upload-button {
+    background-color: var(--cor-botao-cadastrar);
+    color: var(--cor-texto);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.input-foto::-webkit-file-upload-button:hover {
+    background-color: #BBc4A0;
+}
+
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Modal de Confirmação */
+.modal-confirmacao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    background-color: var(--cor-botao-editar);
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-confirmar {
+    background-color: var(--cor-botao-excluir);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilização dos botões de backup e notificações */
+.acoes-extras {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-backup {
+    background-color: var(--cor-botao-cadastrar);
+    color: var(--cor-texto);
+    padding: 12px 24px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    min-width: 200px;
+    justify-content: center;
+}
+
+.btn-backup:hover {
+    background-color: #BBc4A0; 
+    color: var(--cor-texto);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-backup i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    color: var(--cor-primaria);
+}
+
+.btn-backup:hover i {
+    transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .acoes-extras {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .btn-backup {
+        width: 100%;
+    }
+}
