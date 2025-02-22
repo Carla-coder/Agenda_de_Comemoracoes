@@ -93,7 +93,7 @@ css
 
 Os recursos de mídia utilizados neste projeto foram obtidos gratuitamente de:
 
-- **Imagens**: [Pixabay](https://pixabay.com)
+- **Imagens**: [Vecteezy]([https://pixabay.com](https://www.vecteezy.com/vector-art/3325159-seamless-background-with-sweets-cakes-and-balloons))
 - **Sons**: [Pixabay](https://pixabay.com/sound-effects)
 - **Favicon**: [Favicon.io](https://favicon.io)
 
